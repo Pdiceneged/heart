@@ -114,3 +114,4 @@ wikipedia==1.4.0
 wsproto==1.2.0
 zipp==3.17.0
 imbalanced-learn==0.12.3
+catboost==1.2.5
