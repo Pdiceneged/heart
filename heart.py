@@ -213,5 +213,5 @@ if difficulty_stairs:
 if chest_pain:
     st.write('⚠️ Dores no peito durante exercícios podem ser um sinal de problemas cardíacos. Recomendamos procurar um cardiologista.')
 
-st.markdown("---")
-    st.markdown("Desenvolvido por [PedroFS](https://linktr.ee/Pedrofsf)")
+    st.markdown("---")
+        st.markdown("Desenvolvido por [PedroFS](https://linktr.ee/Pedrofsf)")
