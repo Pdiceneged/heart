@@ -177,7 +177,7 @@ lifestyle_adjustment = 0
 if smoke:
     lifestyle_adjustment += 0.17  # Aumenta o risco em até 30% para fumantes
 if alco:
-    lifestyle_adjustment += 0.9  # Aumenta o risco em até 15% para consumo excessivo de álcool
+    lifestyle_adjustment += 0.09  # Aumenta o risco em até 15% para consumo excessivo de álcool
 
 # Reduzir o risco se o paciente for ativo fisicamente
 if active:
