@@ -170,8 +170,22 @@ if difficulty_stairs:
     risk_adjustment += 0.05  # Aumenta o risco em 5% se tiver dificuldade em subir escadas
 if chest_pain:
     risk_adjustment += 0.1  # Aumenta o risco em 10% se tiver dores no peito ao fazer exercícios
+# Ajuste de risco baseado nas variáveis de estilo de vida
+lifestyle_adjustment = 0
 
-adjusted_predict = min(predict + risk_adjustment, 1.0)  # Garantir que o risco ajustado não ultrapasse 100%
+# Aumentar o risco para fumantes e consumidores de álcool (valores baseados em estudos)
+if smoke:
+    lifestyle_adjustment += 0.23  # Aumenta o risco em até 30% para fumantes
+if alco:
+    lifestyle_adjustment += 0.12  # Aumenta o risco em até 15% para consumo excessivo de álcool
+
+# Reduzir o risco se o paciente for ativo fisicamente
+if active:
+    lifestyle_adjustment -= 0.20  # Diminui o risco em até 25% para quem faz atividade física regular
+
+# Ajustar o risco previsto
+adjusted_predict = min(max(predict + lifestyle_adjustment + risk_adjustment, 0.0), 1.0)  # Garantir que o risco ajustado fique entre 0% e 100%
+ # Garantir que o risco ajustado não ultrapasse 100%
 
 # Results
 st.write('---')
