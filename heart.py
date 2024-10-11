@@ -175,13 +175,13 @@ lifestyle_adjustment = 0
 
 # Aumentar o risco para fumantes e consumidores de álcool (valores baseados em estudos)
 if smoke:
-    lifestyle_adjustment += 0.23  # Aumenta o risco em até 30% para fumantes
+    lifestyle_adjustment += 0.17  # Aumenta o risco em até 30% para fumantes
 if alco:
-    lifestyle_adjustment += 0.12  # Aumenta o risco em até 15% para consumo excessivo de álcool
+    lifestyle_adjustment += 0.9  # Aumenta o risco em até 15% para consumo excessivo de álcool
 
 # Reduzir o risco se o paciente for ativo fisicamente
 if active:
-    lifestyle_adjustment -= 0.20  # Diminui o risco em até 25% para quem faz atividade física regular
+    lifestyle_adjustment -= 0.15  # Diminui o risco em até 25% para quem faz atividade física regular
 
 # Ajustar o risco previsto
 adjusted_predict = min(max(predict + lifestyle_adjustment + risk_adjustment, 0.0), 1.0)  # Garantir que o risco ajustado fique entre 0% e 100%
@@ -194,6 +194,7 @@ if st.button('Calcular Probabilidade'):
     if adjusted_predict > 0.5:
         st.error('**Seu risco de doenças cardíacas: {:.2%}**'.format(adjusted_predict))
         st.write('Atenção❗Você está em alto risco de doença cardíaca! 💔')
+        # Detalhes sobre hipertensão e outros fatores de risco
         if hypertension == 4:
             st.write('- Você tem hipertensão grau 1. Preste atenção à sua pressão arterial. Consulte um cardiologista!')
         if hypertension == 5:
@@ -208,6 +209,12 @@ if st.button('Calcular Probabilidade'):
             st.write('- Seu nível de colesterol é 2. Isso significa que você tem um risco moderado de desenvolver aterosclerose vascular, que afeta a presença de doenças cardíacas. Consulte um terapeuta!')
         if cholesterol == 3:
             st.write('- Seu nível de colesterol é 3. Isso significa que você tem um alto risco de desenvolver aterosclerose vascular, que afeta a presença de doenças cardíacas. Consulte um terapeuta!')
+    
+    elif 0.3 < adjusted_predict <= 0.5:
+        st.warning('**Seu risco de doenças cardíacas é moderado: {:.2%}**'.format(adjusted_predict))
+        st.write('Você está em risco moderado de doença cardíaca. 🌡️')
+        st.write('Recomendamos melhorar sua dieta, manter uma rotina de exercícios e consultar um cardiologista para uma avaliação mais detalhada.')
+
     else:
         st.success('**Seu risco de doenças cardíacas: {:.2%}**'.format(adjusted_predict))
         st.write('Ótimo! Parece que você não está em risco de doença cardíaca! 😎')
@@ -226,3 +233,5 @@ if difficulty_stairs:
     st.write('⚠️ Sua dificuldade em subir escadas pode ser um sinal de problemas cardíacos. Recomendamos procurar um cardiologista.')
 if chest_pain:
     st.write('⚠️ Dores no peito durante exercícios podem ser um sinal de problemas cardíacos. Recomendamos procurar um cardiologista.')
+st.write('---')
+st.markdown("Desenvolvido por [PedroFS](https://linktr.ee/Pedrofsf)")
